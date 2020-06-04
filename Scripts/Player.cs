@@ -13,11 +13,9 @@ public class Player : KinematicBody2D
 
     }
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
+    private Vector2 GetInput()
     {
         velocity = new Vector2();
-        var rotation = GetGlobalMousePosition().AngleToPoint(Position);
         if (Input.IsActionPressed("player_left"))
         {
             velocity.x -= 1;
@@ -26,6 +24,16 @@ public class Player : KinematicBody2D
         {
             velocity.x += 1;
         }
-        Position += velocity.Normalized() * speed * delta;
+        if (!Input.IsActionPressed("player_jump"))
+        {
+            velocity.y += 1;
+        }
+        return velocity;
+    }
+    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+
+        Position += GetInput().Normalized() * speed * delta;
     }
 }
