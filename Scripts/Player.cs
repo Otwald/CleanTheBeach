@@ -14,7 +14,6 @@ public class Player : KinematicBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-
     }
 
     private void GetInput()
@@ -53,5 +52,10 @@ public class Player : KinematicBody2D
             doublejumping = true;
         }
         velocity = MoveAndSlide(velocity, new Vector2(0, -1));
+    }
+    public void OnGarbageBodyEntered(PhysicsBody2D body)
+    {
+        EmitSignal("Attach");
+        Hide();
     }
 }

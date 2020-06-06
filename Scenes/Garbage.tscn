@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/RigidGarbage.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.091, 16.2254 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 19.4371, 19.269 )
+
+[node name="Garbage" type="RigidBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+
+[node name="CollisionWalls" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="GAttach" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPlayer" type="CollisionShape2D" parent="GAttach"]
+shape = SubResource( 2 )
