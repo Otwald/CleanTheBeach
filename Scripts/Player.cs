@@ -3,9 +3,12 @@ using System;
 
 public class Player : KinematicBody2D
 {
-    [Export] public int speed = 2;
-    [Export] public int gravity = 10;
+    [Export] public int speed = 500;
+    [Export] public int gravity = 1200;
+    [Export] public int jumpspeed = -400;
 
+    private bool jumping = false;
+    private bool doublejumping = true;
     private Vector2 velocity = new Vector2();
 
     // Called when the node enters the scene tree for the first time.
@@ -14,41 +17,41 @@ public class Player : KinematicBody2D
 
     }
 
-    private Vector2 GetInput()
+    private void GetInput()
     {
-        velocity = new Vector2();
-        if (Input.IsActionPressed("player_left"))
+        velocity.x = 0;
+        bool right = Input.IsActionPressed("player_right");
+        bool left = Input.IsActionPressed("player_left");
+        bool jump = Input.IsActionJustPressed("player_jump");
+        if (right)
         {
-            velocity.x -= 1;
+            velocity.x += speed;
         }
-        if (Input.IsActionPressed("player_right"))
+        if (left)
         {
-            velocity.x += 1;
+            velocity.x -= speed;
         }
-        // if (Input.IsActionPressed("player_up"))
-        // {
-        //     velocity.y -= 1;
-        // }
-        // if (Input.IsActionPressed("player_down"))
-        // {
-        //     velocity.y += 1;
-        // }
-        if (Input.IsActionPressed("player_jump"))
+        if (jump && IsOnFloor())
         {
-            velocity.y -= 1;
+            jumping = true;
+            velocity.y = jumpspeed;
         }
-        return velocity.Normalized() * speed;
+        if (doublejumping && jump && !IsOnFloor())
+        {
+            doublejumping = false;
+            velocity.y = jumpspeed;
+        }
     }
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-
-        MoveAndCollide(GetInput() * delta);
-        velocity = new Vector2();
-        if (!Input.IsActionPressed("player_jump"))
+        GetInput();
+        velocity.y += gravity * delta;
+        if (jumping && IsOnFloor())
         {
-            velocity.y += 1;
+            jumping = false;
+            doublejumping = true;
         }
-        MoveAndCollide(velocity.Normalized() * gravity * delta);
+        velocity = MoveAndSlide(velocity, new Vector2(0, -1));
     }
 }

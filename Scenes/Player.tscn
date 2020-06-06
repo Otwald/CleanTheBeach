@@ -5,7 +5,6 @@
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-speed = 500
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -3.9356, -30.1552, -27.2947, -31.0312, -31.9666, -25.1914, -30.7986, 25.3227, -27.0027, 30.2865, 27.5992, 30.5785, 31.3951, 25.6147, 31.1031, -25.4834, 24.9713, -31.3232 )
