@@ -1,16 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=2]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.0975, 31.9162 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -3.9356, -30.1552, -27.2947, -31.0312, -31.9666, -25.1914, -30.7986, 25.3227, -27.0027, 30.2865, 27.5992, 30.5785, 31.3951, 25.6147, 31.1031, -25.4834, 24.9713, -31.3232 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
