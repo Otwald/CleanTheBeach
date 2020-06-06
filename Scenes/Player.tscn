@@ -13,3 +13,4 @@ polygon = PoolVector2Array( -3.9356, -30.1552, -27.2947, -31.0312, -31.9666, -25
 texture = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
