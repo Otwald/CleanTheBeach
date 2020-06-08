@@ -8,15 +8,14 @@
 [node name="Root" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 400.153, 214.3 )
+position = Vector2( 249.151, 396.591 )
 collision_layer = 2
 collision_mask = 3
 
 [node name="Level" parent="." instance=ExtResource( 2 )]
 
 [node name="Garb" parent="." instance=ExtResource( 3 )]
-position = Vector2( 466.824, 234.844 )
-collision_layer = 2
+position = Vector2( 309.02, 426.657 )
 
 [node name="Garbage" parent="." instance=ExtResource( 4 )]
 position = Vector2( 335.91, 227.439 )
