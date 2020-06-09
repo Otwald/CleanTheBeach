@@ -8,7 +8,6 @@ public class RigidGarbage : RigidBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Hide();
         GetNode("GAttach").Connect("body_entered", this, "AreaEnteredPlayer");
     }
 
@@ -19,7 +18,6 @@ public class RigidGarbage : RigidBody2D
     //  }
     public void AreaEnteredPlayer(RigidBody body)
     {
-        Hide();
         EmitSignal("Attach", Position);
         QueueFree();
     }
