@@ -5,6 +5,7 @@ public class PlayerState : Node
 {
 
     public bool grounded = true;
+    public bool attach = false;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -20,6 +21,6 @@ public class PlayerState : Node
 
     public void OnGround()
     {
-         grounded = !grounded;
+        grounded = !grounded;
     }
 }

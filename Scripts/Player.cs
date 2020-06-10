@@ -13,14 +13,17 @@ public class Player : KinematicBody2D
     private bool jumping = false;
     private bool doublejumping = true;
     private bool attachGarbage = false;
+    private bool tempState = false;
     private AnimatedSprite animatedSprite;
+    private PlayerState playerState;
     public Vector2 velocity = new Vector2();
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         animatedSprite = GetNodeOrNull<AnimatedSprite>("AnimatedSprite");
-        GetNode("/root/Root/Garbage").Connect("Attach", this, "OnAttach");
+        playerState = GetNodeOrNull("/root/Root/PlayerState") as PlayerState;
     }
 
     private void GetInput()
@@ -43,9 +46,7 @@ public class Player : KinematicBody2D
             EmitSignal("OnGround");
             if (attachGarbage)
             {
-                animatedSprite.Animation = "default";
                 EmitSignal("Detach", Position);
-                attachGarbage = false;
             }
             velocity.y = jumpspeed;
 
@@ -60,6 +61,7 @@ public class Player : KinematicBody2D
     public override void _Process(float delta)
     {
         GetInput();
+        CheckSprite();
         velocity.y += gravity * delta;
         velocity = MoveAndSlide(velocity, new Vector2(0, -1));
         if (jumping && IsOnFloor())
@@ -69,17 +71,20 @@ public class Player : KinematicBody2D
             EmitSignal("OnGround");
         }
     }
-    public void OnAttach(PhysicsBody2D body)
+
+    public void CheckSprite()
     {
-        if (!jumping)
+        if (tempState == playerState.attach) { return; }
+        if (playerState.attach)
         {
             animatedSprite.Animation = "Attach";
             attachGarbage = true;
         }
-    }
-
-    public void OnDetach(Vector2 pos)
-    {
-
+        else
+        {
+            animatedSprite.Animation = "default";
+            attachGarbage = false;
+        }
+        tempState = playerState.attach;
     }
 }

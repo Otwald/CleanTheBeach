@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/RigidGarbage.cs" type="Script" id=2]
@@ -9,7 +9,11 @@ extents = Vector2( 16.091, 16.2254 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 19.4371, 19.269 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 17.7059, 17.9826 )
+
 [node name="Garbage" type="RigidBody2D"]
+collision_layer = 4
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -20,8 +24,14 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="GAttach" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionPlayer" type="CollisionShape2D" parent="GAttach"]
 shape = SubResource( 2 )
+
+[node name="GroundCheck" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundCheck"]
+shape = SubResource( 3 )
