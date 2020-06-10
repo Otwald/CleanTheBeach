@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Main.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Garbage.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/PlayerState.cs" type="Script" id=5]
 
 [node name="Root" type="Node"]
+script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 398.935, 213.658 )
@@ -16,3 +19,6 @@ collision_mask = 3
 [node name="Garbage" parent="." instance=ExtResource( 4 )]
 position = Vector2( 318.722, 226.211 )
 collision_layer = 2
+
+[node name="PlayerState" type="Node" parent="."]
+script = ExtResource( 5 )

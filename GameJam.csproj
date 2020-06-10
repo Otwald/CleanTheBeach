@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Garb.cs" />
+    <Compile Include="Scripts\Main.cs" />
     <Compile Include="Scripts\Player.cs" />
+    <Compile Include="Scripts\PlayerState.cs" />
     <Compile Include="Scripts\RigidGarbage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

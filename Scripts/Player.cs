@@ -6,6 +6,9 @@ public class Player : KinematicBody2D
     [Export] public int speed = 500;
     [Export] public int gravity = 1200;
     [Export] public int jumpspeed = -400;
+    [Signal] public delegate void Detach();
+    [Signal] public delegate void OnGround();
+
 
     private bool jumping = false;
     private bool doublejumping = true;
@@ -36,12 +39,14 @@ public class Player : KinematicBody2D
         }
         if (jump && IsOnFloor())
         {
+            jumping = true;
+            EmitSignal("OnGround");
             if (attachGarbage)
             {
                 animatedSprite.Animation = "default";
+                EmitSignal("Detach", Position);
                 attachGarbage = false;
             }
-            jumping = true;
             velocity.y = jumpspeed;
 
         }
@@ -56,16 +61,25 @@ public class Player : KinematicBody2D
     {
         GetInput();
         velocity.y += gravity * delta;
+        velocity = MoveAndSlide(velocity, new Vector2(0, -1));
         if (jumping && IsOnFloor())
         {
             jumping = false;
             doublejumping = true;
+            EmitSignal("OnGround");
         }
-        velocity = MoveAndSlide(velocity, new Vector2(0, -1));
     }
     public void OnAttach(PhysicsBody2D body)
     {
-        animatedSprite.Animation = "Attach";
-        attachGarbage = true;
+        if (!jumping)
+        {
+            animatedSprite.Animation = "Attach";
+            attachGarbage = true;
+        }
+    }
+
+    public void OnDetach(Vector2 pos)
+    {
+
     }
 }
