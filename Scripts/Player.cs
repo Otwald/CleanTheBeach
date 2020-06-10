@@ -7,7 +7,7 @@ public class Player : KinematicBody2D
     [Export] public int gravity = 1200;
     [Export] public int jumpspeed = -400;
     [Export] public int kickForceX = 200;
-    [Export] public int kickForceY = 200;
+    [Export] public int kickForceY = -200;
     [Signal] public delegate void Detach();
     [Signal] public delegate void OnGround();
     [Signal] public delegate void OnKick();
@@ -34,7 +34,9 @@ public class Player : KinematicBody2D
         playerState = GetNodeOrNull("/root/Root/PlayerState") as PlayerState;
         leftGarbSpawn = GetNodeOrNull<Node2D>("LeftGarbSpawn");
         rightGarbSpawn = GetNodeOrNull<Node2D>("RightGarbSpawn");
+        // Hide();
     }
+
 
     private void GetInput()
     {
@@ -92,6 +94,11 @@ public class Player : KinematicBody2D
         }
     }
 
+    public void Start(Vector2 startpos)
+    {
+        Position = startpos;
+        Show();
+    }
     public void CheckSprite()
     {
         if (tempState == playerState.attach) { return; }

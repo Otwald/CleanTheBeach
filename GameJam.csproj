@@ -59,6 +59,7 @@
     <Compile Include="Scripts\Player.cs" />
     <Compile Include="Scripts\PlayerState.cs" />
     <Compile Include="Scripts\RigidGarbage.cs" />
+    <Compile Include="Scripts\Water.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
