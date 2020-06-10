@@ -41,3 +41,9 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+
+[node name="RightGarbSpawn" type="Node2D" parent="."]
+position = Vector2( 35, 15 )
+
+[node name="LeftGarbSpawn" type="Node2D" parent="."]
+position = Vector2( -35, 15 )

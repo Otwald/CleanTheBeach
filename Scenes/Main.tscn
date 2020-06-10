@@ -18,7 +18,5 @@ collision_layer = 2
 [node name="PlayerState" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[node name="GarbageStash" type="Node" parent="."]
-
 [node name="Garbage" parent="." instance=ExtResource( 4 )]
 position = Vector2( 318.722, 226.211 )

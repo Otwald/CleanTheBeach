@@ -14,12 +14,10 @@ public class RigidGarbage : RigidBody2D
     public override void _Ready()
     {
         ps = GetNode("/root/Root/PlayerState") as PlayerState;
-        // groundRay = GetNodeOrNull("GroundRay") as RayCast2D;
         GetNode("GAttach").Connect("body_entered", this, "AreaEnteredPlayer");
         groundCheck = GetNodeOrNull("GroundCheck") as Area2D;
         groundCheck.Connect("body_entered", this, "GroundEnter");
         groundCheck.Connect("body_exited", this, "GroundLeave");
-        Connect("tree_entered", this, "OnGarbageDetach");
         Connect("tree_exiting", this, "OnGargageAtach");
     }
 
@@ -41,7 +39,6 @@ public class RigidGarbage : RigidBody2D
     {
         if (ps.grounded)
         {
-            GD.Print(grounded);
             if (grounded)
             {
                 EmitSignal("Attach");
@@ -57,9 +54,5 @@ public class RigidGarbage : RigidBody2D
     private void OnGargageAtach()
     {
         ps.attach = true;
-    }
-    private void OnGarbageDetach()
-    {
-        ps.attach = false;
     }
 }
