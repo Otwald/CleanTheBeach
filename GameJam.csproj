@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Garb.cs" />
+    <Compile Include="Scripts\Hud.cs" />
     <Compile Include="Scripts\Main.cs" />
     <Compile Include="Scripts\Player.cs" />
     <Compile Include="Scripts\PlayerState.cs" />

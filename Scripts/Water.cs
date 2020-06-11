@@ -17,8 +17,9 @@ public class Water : KinematicBody2D
         velocity = MoveAndSlide(velocity);
     }
 
-    public void Start()
+    public void Start(Vector2 pos)
     {
+        Position = pos;
         velocity.x = waterSpeed;
     }
 }

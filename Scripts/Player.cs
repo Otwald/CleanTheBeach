@@ -19,6 +19,8 @@ public class Player : KinematicBody2D
     private bool tempState = false;
 
     private bool spriteFlip = true;
+
+    private bool controll = false;
     private AnimatedSprite animatedSprite;
     private Node2D leftGarbSpawn;
 
@@ -77,6 +79,7 @@ public class Player : KinematicBody2D
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+        if (!controll) { return; }
         GetInput();
         CheckSprite();
         velocity.y += gravity * delta;
@@ -98,6 +101,13 @@ public class Player : KinematicBody2D
     {
         Position = startpos;
         Show();
+        controll = true;
+    }
+
+    public void GameOver()
+    {
+        controll = false;
+        Hide();
     }
     public void CheckSprite()
     {

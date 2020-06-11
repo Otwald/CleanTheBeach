@@ -18,12 +18,18 @@ public class RigidGarbage : RigidBody2D
         groundCheck.Connect("body_entered", this, "GroundEnter");
         groundCheck.Connect("body_exited", this, "GroundLeave");
         Connect("tree_exiting", this, "OnGargageAtach");
+        GetNodeOrNull("/root/Root/Hud").Connect("StartGame", this, "Start");
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     // public override void _Process(float delta)
     // {
     // }
+
+    public void Start()
+    {
+        Position = GetNodeOrNull<Node2D>("/root/Root/LevelRoot/StartGarbage").GlobalPosition;
+    }
 
     public void GroundEnter(PhysicsBody2D body)
     {

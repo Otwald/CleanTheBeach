@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=2]
@@ -6,20 +6,27 @@
 [ext_resource path="res://Scenes/Garbage.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/PlayerState.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/Water.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Hud.tscn" type="PackedScene" id=7]
 
 [node name="Root" type="Node"]
 script = ExtResource( 3 )
 
 [node name="LevelRoot" type="Node" parent="."]
 
-[node name="StartPosition" type="Node2D" parent="LevelRoot"]
+[node name="StartPlayer" type="Node2D" parent="LevelRoot"]
 position = Vector2( 457.104, 242.617 )
+
+[node name="StartWater" type="Node2D" parent="LevelRoot"]
+position = Vector2( 83.0002, 431.001 )
+
+[node name="StartGarbage" type="Node2D" parent="LevelRoot"]
+position = Vector2( 348.001, 246 )
 
 [node name="Water" parent="LevelRoot" instance=ExtResource( 6 )]
 position = Vector2( 195.001, 405.001 )
 
 [node name="Garbage" parent="LevelRoot" instance=ExtResource( 4 )]
-position = Vector2( 318.722, 226.211 )
+position = Vector2( -24.2787, 40.2106 )
 
 [node name="PlayerState" type="Node" parent="LevelRoot"]
 script = ExtResource( 5 )
@@ -30,4 +37,4 @@ script = ExtResource( 5 )
 position = Vector2( 33.8863, 28.4369 )
 collision_layer = 2
 
-[node name="HudRoot" type="Node" parent="."]
+[node name="Hud" parent="." instance=ExtResource( 7 )]

@@ -5,11 +5,13 @@ public class Main : Node
 {
     // Declare member variables here. Examples:
     // private int a = 2;
-    // private string b = "text";
+
+    [Signal] public delegate void GameOver();
     private PackedScene resgarb = GD.Load("res://Scenes/Garbage.tscn") as PackedScene;
 
     private Player player;
     private Node levelRoot;
+    private CanvasLayer hud;
     private PlayerState playerState;
     private Vector2 defaultForce = new Vector2(0, 0);
 
@@ -17,11 +19,12 @@ public class Main : Node
     public override void _Ready()
     {
         levelRoot = GetNodeOrNull("LevelRoot") as Node;
+        hud = GetNodeOrNull("Hud") as CanvasLayer;
+        hud.Connect("StartGame", this, "NewGame");
         player = levelRoot.GetNodeOrNull("Player") as Player;
         player.Connect("Detach", this, "OnGarbageDetach");
         player.Connect("OnKick", this, "OnGarbageKick");
         playerState = levelRoot.GetNodeOrNull("PlayerState") as PlayerState;
-        NewGame();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +35,8 @@ public class Main : Node
 
     private void NewGame()
     {
-        // player.Start(GetNodeOrNull<Area2D>("StartPosition").GlobalPosition);
+        player.Start(levelRoot.GetNodeOrNull<Node2D>("StartPlayer").GlobalPosition);
+        levelRoot.GetNodeOrNull<Water>("Water").Start(levelRoot.GetNodeOrNull<Node2D>("StartWater").GlobalPosition);
     }
 
     private void OnGarbageDetach(Vector2 pos)
@@ -56,7 +60,7 @@ public class Main : Node
 
     public void OnPlayerHit(PhysicsBody2D body)
     {
-        GD.Print("Hit");
-        player.QueueFree();
+        EmitSignal("GameOver");
+        player.GameOver();
     }
 }
