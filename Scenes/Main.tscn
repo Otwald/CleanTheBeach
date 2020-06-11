@@ -10,20 +10,24 @@
 [node name="Root" type="Node"]
 script = ExtResource( 3 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="LevelRoot" type="Node" parent="."]
+
+[node name="StartPosition" type="Node2D" parent="LevelRoot"]
+position = Vector2( 457.104, 242.617 )
+
+[node name="Water" parent="LevelRoot" instance=ExtResource( 6 )]
+position = Vector2( 195.001, 405.001 )
+
+[node name="Garbage" parent="LevelRoot" instance=ExtResource( 4 )]
+position = Vector2( 318.722, 226.211 )
+
+[node name="PlayerState" type="Node" parent="LevelRoot"]
+script = ExtResource( 5 )
+
+[node name="Level" parent="LevelRoot" instance=ExtResource( 2 )]
+
+[node name="Player" parent="LevelRoot" instance=ExtResource( 1 )]
 position = Vector2( 33.8863, 28.4369 )
 collision_layer = 2
 
-[node name="Level" parent="." instance=ExtResource( 2 )]
-
-[node name="PlayerState" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="Garbage" parent="." instance=ExtResource( 4 )]
-position = Vector2( 318.722, 226.211 )
-
-[node name="Water" parent="." instance=ExtResource( 6 )]
-position = Vector2( 195.001, 405.001 )
-
-[node name="StartPosition" type="Node2D" parent="."]
-position = Vector2( 457.104, 242.617 )
+[node name="HudRoot" type="Node" parent="."]

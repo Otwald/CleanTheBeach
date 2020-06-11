@@ -31,7 +31,7 @@ public class Player : KinematicBody2D
     public override void _Ready()
     {
         animatedSprite = GetNodeOrNull<AnimatedSprite>("AnimatedSprite");
-        playerState = GetNodeOrNull("/root/Root/PlayerState") as PlayerState;
+        playerState = GetNodeOrNull("/root/Root/LevelRoot/PlayerState") as PlayerState;
         leftGarbSpawn = GetNodeOrNull<Node2D>("LeftGarbSpawn");
         rightGarbSpawn = GetNodeOrNull<Node2D>("RightGarbSpawn");
         // Hide();

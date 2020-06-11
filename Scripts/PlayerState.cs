@@ -10,7 +10,7 @@ public class PlayerState : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        GetNode("/root/Root/Player").Connect("OnGround", this, "OnGround");
+        GetNode("/root/Root/LevelRoot/Player").Connect("OnGround", this, "OnGround");
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

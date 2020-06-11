@@ -8,7 +8,7 @@ public class Water : KinematicBody2D
     private Vector2 velocity = new Vector2(1, 0);
     public override void _Ready()
     {
-        GetNodeOrNull("KillPlane").Connect("body_entered", GetParent(), "OnPlayerHit");
+        GetNodeOrNull("KillPlane").Connect("body_entered", GetNode("/root/Root"), "OnPlayerHit");
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

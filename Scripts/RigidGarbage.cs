@@ -9,11 +9,10 @@ public class RigidGarbage : RigidBody2D
     private PlayerState ps;
     private Area2D groundCheck;
     private bool grounded = false;
-    private float groundDistance;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        ps = GetNode("/root/Root/PlayerState") as PlayerState;
+        ps = GetNode("/root/Root/LevelRoot/PlayerState") as PlayerState;
         GetNode("GAttach").Connect("body_entered", this, "AreaEnteredPlayer");
         groundCheck = GetNodeOrNull("GroundCheck") as Area2D;
         groundCheck.Connect("body_entered", this, "GroundEnter");

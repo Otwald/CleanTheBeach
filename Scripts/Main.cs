@@ -9,16 +9,18 @@ public class Main : Node
     private PackedScene resgarb = GD.Load("res://Scenes/Garbage.tscn") as PackedScene;
 
     private Player player;
+    private Node levelRoot;
     private PlayerState playerState;
     private Vector2 defaultForce = new Vector2(0, 0);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        player = GetNodeOrNull("Player") as Player;
+        levelRoot = GetNodeOrNull("LevelRoot") as Node;
+        player = levelRoot.GetNodeOrNull("Player") as Player;
         player.Connect("Detach", this, "OnGarbageDetach");
         player.Connect("OnKick", this, "OnGarbageKick");
-        playerState = GetNodeOrNull("PlayerState") as PlayerState;
+        playerState = levelRoot.GetNodeOrNull("PlayerState") as PlayerState;
         NewGame();
     }
 
@@ -48,7 +50,7 @@ public class Main : Node
         var garbage = (RigidGarbage)resgarb.Instance();
         garbage.OnDetach(pos);
         garbage.ApplyCentralImpulse((Vector2)force);
-        AddChild(garbage, true);
+        levelRoot.AddChild(garbage, true);
         playerState.attach = false;
     }
 
