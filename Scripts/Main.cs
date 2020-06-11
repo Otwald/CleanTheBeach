@@ -37,6 +37,10 @@ public class Main : Node
     {
         player.Start(levelRoot.GetNodeOrNull<Node2D>("StartPlayer").GlobalPosition);
         levelRoot.GetNodeOrNull<Water>("Water").Start(levelRoot.GetNodeOrNull<Node2D>("StartWater").GlobalPosition);
+        if (!OnStartCheck())
+        {
+            OnGarbageDetach(levelRoot.GetNodeOrNull<Node2D>("StartGarbage").GlobalPosition);
+        }
     }
 
     private void OnGarbageDetach(Vector2 pos)
@@ -62,5 +66,19 @@ public class Main : Node
     {
         EmitSignal("GameOver");
         player.GameOver();
+    }
+
+    public bool OnStartCheck()
+    {
+        bool valuereturn = false;
+        foreach (Node elements in levelRoot.GetChildren())
+        {
+            // Type t = elements.GetType();
+            if (elements.GetType().Equals(typeof(RigidGarbage)))
+            {
+                valuereturn = true;
+            }
+        }
+        return valuereturn;
     }
 }
