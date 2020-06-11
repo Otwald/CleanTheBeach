@@ -16,6 +16,7 @@ public class Hud : CanvasLayer
         start = GetNodeOrNull("Start") as Button;
         start.Connect("pressed", this, "OnPressStart");
         GetParent().Connect("GameOver", this, "OnReset");
+        GetParent().Connect("Win", this, "OnWin");
         OnStart();
     }
 
@@ -24,25 +25,33 @@ public class Hud : CanvasLayer
     //  {
     //      
     //  }
+
+    private void handleMessage(string msgT, string buttonT)
+    {
+        msg.Text = msgT;
+        msg.Show();
+        start.Text = buttonT;
+        start.Show();
+    }
     private void OnStart()
     {
-        msg.Text = "Clean the Beach!";
-        start.Text = "Start!";
+        handleMessage("Clean the Beach!", "Start!");
     }
 
     private void OnReset()
     {
-        msg.Text = "More Cleaning!";
-        msg.Show();
-        start.Text = "Restart!";
-        start.Show();
-
+        handleMessage("More Cleaning!", "Restart!");
     }
     public void OnPressStart()
     {
         start.Hide();
         msg.Hide();
         EmitSignal("StartGame");
+    }
+
+    public void OnWin()
+    {
+        handleMessage("The Beach is now Clean!", "Restart!");
     }
 
 }

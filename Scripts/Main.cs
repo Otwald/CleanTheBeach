@@ -7,9 +7,11 @@ public class Main : Node
     // private int a = 2;
 
     [Signal] public delegate void GameOver();
+    [Signal] public delegate void Win();
     private PackedScene resgarb = GD.Load("res://Scenes/Garbage.tscn") as PackedScene;
 
     private Player player;
+    private Water water;
     private Node levelRoot;
     private CanvasLayer hud;
     private PlayerState playerState;
@@ -22,9 +24,11 @@ public class Main : Node
         hud = GetNodeOrNull("Hud") as CanvasLayer;
         hud.Connect("StartGame", this, "NewGame");
         player = levelRoot.GetNodeOrNull("Player") as Player;
+        water = levelRoot.GetNodeOrNull("Water") as Water;
         player.Connect("Detach", this, "OnGarbageDetach");
         player.Connect("OnKick", this, "OnGarbageKick");
         playerState = levelRoot.GetNodeOrNull("PlayerState") as PlayerState;
+        levelRoot.GetNodeOrNull("GarbCan").Connect("OnLevelEnd", this, "OnLevelEnd");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,7 +41,7 @@ public class Main : Node
     private void NewGame()
     {
         player.Start(levelRoot.GetNodeOrNull<Node2D>("StartPlayer").GlobalPosition);
-        levelRoot.GetNodeOrNull<Water>("Water").Start(levelRoot.GetNodeOrNull<Node2D>("StartWater").GlobalPosition);
+        water.Start(levelRoot.GetNodeOrNull<Node2D>("StartWater").GlobalPosition);
         if (!OnStartCheck())
         {
             OnGarbageDetach(levelRoot.GetNodeOrNull<Node2D>("StartGarbage").GlobalPosition);
@@ -67,6 +71,17 @@ public class Main : Node
     {
         EmitSignal("GameOver");
         player.GameOver();
+        water.GameOver();
+    }
+
+    public void OnLevelEnd()
+    {
+        if (playerState.attach)
+        {
+            EmitSignal("Win");
+            player.GameOver();
+            water.GameOver();
+        }
     }
 
     public bool OnStartCheck()

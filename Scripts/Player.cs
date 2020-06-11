@@ -114,7 +114,7 @@ public class Player : KinematicBody2D
     public void GameOver()
     {
         controll = false;
-        Hide();
+        // Hide();
     }
     public void CheckSprite()
     {

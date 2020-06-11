@@ -22,5 +22,11 @@ public class Water : KinematicBody2D
     {
         Position = pos;
         velocity.x = waterSpeed;
+        Show();
+    }
+
+    public void GameOver()
+    {
+        velocity.x = 0;
     }
 }

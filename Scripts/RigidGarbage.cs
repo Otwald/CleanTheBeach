@@ -29,6 +29,7 @@ public class RigidGarbage : RigidBody2D
     public void Start()
     {
         Position = GetNodeOrNull<Node2D>("/root/Root/LevelRoot/StartGarbage").GlobalPosition;
+        Show();
     }
 
     public void GroundEnter(PhysicsBody2D body)
