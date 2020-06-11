@@ -19,6 +19,11 @@ config/name="GameJam"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/resizable=false
+window/size/borderless=true
+
 [input]
 
 player_left={
@@ -61,4 +66,5 @@ player_action={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"

@@ -21,6 +21,7 @@ public class Player : KinematicBody2D
     private bool spriteFlip = true;
 
     private bool controll = false;
+    private string animationVersion = "S";
     private AnimatedSprite animatedSprite;
     private Node2D leftGarbSpawn;
 
@@ -36,6 +37,7 @@ public class Player : KinematicBody2D
         playerState = GetNodeOrNull("/root/Root/LevelRoot/PlayerState") as PlayerState;
         leftGarbSpawn = GetNodeOrNull<Node2D>("LeftGarbSpawn");
         rightGarbSpawn = GetNodeOrNull<Node2D>("RightGarbSpawn");
+        animatedSprite.Play();
         // Hide();
     }
 
@@ -86,8 +88,13 @@ public class Player : KinematicBody2D
         velocity = MoveAndSlide(velocity, new Vector2(0, -1));
         if (velocity.x != 0)
         {
+            animatedSprite.Animation = "walk" + animationVersion;
             spriteFlip = velocity.x < 0;
             animatedSprite.FlipH = spriteFlip;
+        }
+        else
+        {
+            animatedSprite.Animation = "stand" + animationVersion;
         }
         if (jumping && IsOnFloor())
         {
@@ -114,12 +121,12 @@ public class Player : KinematicBody2D
         if (tempState == playerState.attach) { return; }
         if (playerState.attach)
         {
-            animatedSprite.Animation = "Attach";
+            animationVersion = "A";
             attachGarbage = true;
         }
         else
         {
-            animatedSprite.Animation = "default";
+            animationVersion = "S";
             attachGarbage = false;
         }
         tempState = playerState.attach;

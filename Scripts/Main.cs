@@ -33,6 +33,7 @@ public class Main : Node
     //     GD.Print(GetChildCount());
     // }
 
+    ///<summary>Test Docstring
     private void NewGame()
     {
         player.Start(levelRoot.GetNodeOrNull<Node2D>("StartPlayer").GlobalPosition);

@@ -9,6 +9,7 @@ public class Water : KinematicBody2D
     public override void _Ready()
     {
         GetNodeOrNull("KillPlane").Connect("body_entered", GetNode("/root/Root"), "OnPlayerHit");
+        GetNodeOrNull<AnimatedSprite>("AnimatedSprite").Play();
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,22 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=2]
-[ext_resource path="res://Assets/PlaceHolder.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PlayerGarWalking1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PlayerStanding1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/PlayerStanding2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/PlayerWalking1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/PlayerGarStand2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/PlayerGarStand1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/BG.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32.0975, 31.9162 )
+extents = Vector2( 24.1783, 24.919 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "default",
+"name": "walkA",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
-"name": "Attach",
+"name": "walkS",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "standA",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "standS",
 "speed": 5.0
 } ]
 
@@ -29,18 +45,20 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="Sprite2" type="Sprite" parent="Camera2D"]
+z_index = -5
+texture = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+animation = "walkA"
 
 [node name="RightGarbSpawn" type="Node2D" parent="."]
 position = Vector2( 35, 15 )
